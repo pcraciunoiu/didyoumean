@@ -1,0 +1,2 @@
+-e svn+http://pyhunspell.googlecode.com/svn/trunk/#egg=pyhunspell
+nose
