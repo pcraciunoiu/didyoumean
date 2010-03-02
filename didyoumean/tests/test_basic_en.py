@@ -17,8 +17,10 @@ def test_check_valid_string():
 
 
 def test_check_invalid_word():
+    """A signle misspelled word should return false"""
     eq_(False, d.check('tset'))
 
 
 def test_check_invalid_string():
+    """A misspelled word in a sentence should return false"""
     eq_(False, d.check('this is a tset'))
