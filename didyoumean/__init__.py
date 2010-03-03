@@ -4,8 +4,6 @@ from os import path
 
 import hunspell
 
-from encoding import force_unicode
-
 
 class DidYouMean(object):
     """
