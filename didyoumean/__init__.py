@@ -4,8 +4,10 @@ from os import path
 
 import hunspell
 
+from encoding import force_unicode
 
-class DidYouMean:
+
+class DidYouMean(object):
     """
     Checks to see that each word in a string is spelled correctly and, if not,
     provides suggestions for those words.
@@ -30,14 +32,14 @@ class DidYouMean:
     def check(self, string):
         """Checks to see if the words in this string are spelled correctly."""
 
-        words = [unicode(word) for word in string.split()]
+        words = self._split_string(string)
 
         if self.hunspell is None:
             """If I don't have a dictionary, just assume everything is fine"""
             return True
 
         for word in words:
-            if not self.hunspell.spell(word):
+            if not self.hunspell.spell(word.encode('utf-8')):
                 return False
 
         return True
@@ -48,4 +50,28 @@ class DidYouMean:
 
         Word = namedtuple('Word', 'old new corrected')
 
-        return None
+        if self.hunspell is None:
+            result = []
+            for word in self._split_string(string):
+                result.append(Word(word, word, False))
+            return result
+
+        result = []
+        for word in self._split_string(string):
+            if not self.hunspell.spell(word.encode('utf-8')):
+                try:
+                    new = self.hunspell.suggest(word.encode('utf-8'))[0]
+                    result.append(Word(word, new.decode('utf-8'), True))
+                except IndexError:
+                    result.append(Word(word, word, False))
+            else:
+                result.append(Word(word, word, False))
+
+        return result
+
+
+    def _split_string(self, string):
+        """Split a string. I'm wrapping this just in case I need to do 
+        something fancier."""
+
+        return string.split()
