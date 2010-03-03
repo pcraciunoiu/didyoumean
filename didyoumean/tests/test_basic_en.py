@@ -31,3 +31,9 @@ def test_correct_english_sentence():
     wrong = 'this is worng'
     new = ' '.join([word.new for word in d.suggest(wrong)])
     eq_('this is wrong', new)
+
+
+def test_wrong_capitalization():
+    """Make sure that passing incorrectly capitalized locales still works"""
+    e = DidYouMean('en-us')
+    eq_(False, e.check('worng'))

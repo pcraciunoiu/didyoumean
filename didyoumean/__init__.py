@@ -17,12 +17,12 @@ class DidYouMean(object):
         """Requires a locale to work correctly."""
 
         lang, co = re.split(r'\W', locale, 2)
-        locale = u'_'.join([lang, co])
+        locale = u'_'.join([lang.lower(), co.upper()])
 
         if path.isfile(dict_dir+locale+'.dic'):
             self.hunspell = hunspell.HunSpell(dict_dir+locale+'.dic',
                                               dict_dir+locale+'.aff')
-        elif path.isfile(dict_dir+lang+'.dic'):
+        elif path.isfile(dict_dir+lang.lower()+'.dic'):
             self.hunspell = hunspell.HunSpell(dict_dir+lang+'.dic',
                                               dict_dir+lang+'.aff')
         else:
