@@ -95,3 +95,15 @@ As with most spell-checks, didyoumean will not work on languages without
 separators between words. (I couldn't find dictionaries for Japanese or
 Chinese.) Since didyoumean works by checking each word individually,
 languages without word separators break.
+
+
+To Do
+-----
+
+- There is one failing test (in ``test_basic_farsi.py``) which I believe is
+  only failing because either I copied and pasted the text badly, or the
+  suggestion doesn't match the expected text. In either case, if you speak
+  Farsi and can fix the test case, please do!
+- Once I incorporate this into our Django app, I'll include an example an
+  example of how we use didyoumean. It will be specific to our app, ie:
+  Django/Jingo/Jinja2, but hopefully demonstrate real-world usage.
