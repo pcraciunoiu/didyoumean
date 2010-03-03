@@ -24,3 +24,10 @@ def test_check_invalid_word():
 def test_check_invalid_string():
     """A misspelled word in a sentence should return false"""
     eq_(False, d.check('this is a tset'))
+
+
+def test_correct_english_sentence():
+    """A misspellend word in an English sentence should be corrected"""
+    wrong = 'this is worng'
+    new = ' '.join([word.new for word in d.suggest(wrong)])
+    eq_('this is wrong', new)
