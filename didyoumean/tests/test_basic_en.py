@@ -37,3 +37,8 @@ def test_wrong_capitalization():
     """Make sure that passing incorrectly capitalized locales still works"""
     e = DidYouMean('en-us')
     eq_(False, e.check('worng'))
+
+
+def test_simple_locale():
+    e = DidYouMean('en')
+    eq_(True, e.check('fial'))

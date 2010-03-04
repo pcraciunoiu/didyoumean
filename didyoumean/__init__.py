@@ -14,13 +14,19 @@ class DidYouMean(object):
     def __init__(self, locale, dict_dir='/usr/share/myspell/'):
         """Requires a locale to work correctly."""
 
-        lang, co = re.split(r'\W', locale, 2)
-        locale = u'_'.join([lang.lower(), co.upper()])
+        parts = re.split(r'\W', locale, 2)
+        lang = parts[0].lower()
+        try:
+            co = parts[1].upper()
+        except IndexError:
+            co = ''
+
+        locale = u'_'.join([lang, co])
 
         if path.isfile(dict_dir+locale+'.dic'):
             self.hunspell = hunspell.HunSpell(dict_dir+locale+'.dic',
                                               dict_dir+locale+'.aff')
-        elif path.isfile(dict_dir+lang.lower()+'.dic'):
+        elif path.isfile(dict_dir+lang+'.dic'):
             self.hunspell = hunspell.HunSpell(dict_dir+lang+'.dic',
                                               dict_dir+lang+'.aff')
         else:
