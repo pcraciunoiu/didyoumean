@@ -11,7 +11,7 @@ class DidYouMean(object):
     provides suggestions for those words.
     """
 
-    def __init__(self, locale, dict_dir='/usr/share/myspell/'):
+    def __init__(self, locale, dict_dir='/usr/share/myspell/', words=None):
         """Requires a locale to work correctly."""
 
         parts = re.split(r'\W', locale, 2)
@@ -31,6 +31,12 @@ class DidYouMean(object):
                                               dict_dir+lang+'.aff')
         else:
             self.hunspell = None
+
+        if self.hunspell and words:
+            fp = open(words, 'r')
+            lines = [l.strip() for l in fp.readlines()]
+            for line in lines:
+                self.hunspell.add(line)
 
 
     def check(self, string):
