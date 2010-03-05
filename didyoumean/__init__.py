@@ -33,10 +33,10 @@ class DidYouMean(object):
             self.hunspell = None
 
         if self.hunspell and words:
-            fp = open(words, 'r')
-            lines = [l.strip() for l in fp.readlines()]
-            for line in lines:
-                self.hunspell.add(line)
+            with open(words, 'r') as fp:
+                lines = [l.strip() for l in fp.readlines()]
+                for line in lines:
+                    self.hunspell.add(line)
 
 
     def check(self, string):
