@@ -2,12 +2,12 @@ from setuptools import setup
 
 setup(
     name='didyoumean',
-    version='0.1',
+    version='0.1.1',
     description='A wrapper for PyHunspell to help with spelling suggestions for search.',
     long_description=open('README.rst').read(),
     author='James Socol',
     author_email='james@mozilla.com',
-    url='http://github.com/jsocol/bleach',
+    url='http://github.com/jsocol/didyoumean',
     license='BSD',
     packages=['didyoumean'],
     include_package_data=True,
